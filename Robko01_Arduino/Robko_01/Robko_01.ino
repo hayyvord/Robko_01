@@ -260,5 +260,11 @@ void SetupSteppers()
 
 void RunMotors()
 {
+  Base.run();
+  Shoulder.run();
+  Elbow.run();
+  Pitch.run();
+  Roll.run();
+  Gripper.run();  
 }
 
