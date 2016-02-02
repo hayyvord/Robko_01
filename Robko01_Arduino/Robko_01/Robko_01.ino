@@ -44,7 +44,7 @@ void ReadCommand()
 
 boolean ValidateCommand(String command)
 {
-  boolean state;
+  boolean state = false;
 
   int Motor = 0;
   int Steps = 0;
