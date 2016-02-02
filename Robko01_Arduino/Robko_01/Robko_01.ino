@@ -3,11 +3,11 @@
 #include <stdlib.h>
 
 AccelStepper Base(AccelStepper::FULL4WIRE, 23, 25, 27, 29);
-AccelStepper Shoulder(AccelStepper::FULL4WIRE, 22, 24, 26, 28);
-AccelStepper Elbow(AccelStepper::FULL4WIRE, 30, 32, 34, 36);
-AccelStepper Pitch(AccelStepper::FULL4WIRE, 39, 41, 43, 45);
-AccelStepper Roll(AccelStepper::FULL4WIRE, 38, 40, 42, 44);
-AccelStepper Gripper(AccelStepper::FULL4WIRE, 31, 33, 35, 37);
+AccelStepper Shoulder(AccelStepper::HALF4WIRE, 22, 24, 26, 28);
+AccelStepper Elbow(AccelStepper::HALF4WIRE, 30, 32, 34, 36);
+AccelStepper Pitch(AccelStepper::HALF4WIRE, 39, 41, 43, 45);
+AccelStepper Roll(AccelStepper::HALF4WIRE, 38, 40, 42, 44);
+AccelStepper Gripper(AccelStepper::HALF4WIRE, 31, 33, 35, 37);
 
 String IncommingCommnad = "";
 
@@ -44,7 +44,7 @@ void ReadCommand()
 
 boolean ValidateCommand(String command)
 {
-  boolean state = false;
+  boolean state;
 
   int Motor = 0;
   int Steps = 0;
@@ -131,7 +131,7 @@ void ParseCommand(String command)
       Motor = atoi(command.substring(2).c_str());
       Steps = atoi(command.substring(4, 8).c_str());
 
-      if (command[1] == 'D')
+      if (command[1] == 'M')
       {
 
         if (command[3] == '+')
