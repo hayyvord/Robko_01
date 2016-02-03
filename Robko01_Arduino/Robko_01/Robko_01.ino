@@ -72,9 +72,9 @@ boolean ValidateCommand(String command)
   boolean state;
   state = false;
 
-  static int motor = 0;
-  static int steps = 0;
-  static int speed = 0;
+  static int motor = -1;
+  static int steps = -1;
+  static int speed = -1;
 
   if (command[0] == '?' && command[8] == '\n')
   {
@@ -185,9 +185,9 @@ boolean ValidateCommand(String command)
 
 void ParseCommand(String command)
 {
-  static int motor = 0;
-  static int steps = 0;
-  static int speed = 0;
+  static int motor = -1;
+  static int steps = -1;
+  static float speed = -1;
 
 
   if (command[0] == '?' && command[8] == ':' && command[13] == '\n')
@@ -202,11 +202,11 @@ void ParseCommand(String command)
 
         if (command[3] == '+')
         {
-          RunStepper(motor, steps, DEFAULT_SPEED);
+          RunStepper(motor, steps, speed);
         }
         else if (command[3] == '-')
         {
-          RunStepper(motor, -steps, DEFAULT_SPEED);
+          RunStepper(motor, -steps, speed);
         }
 
       }
@@ -225,11 +225,11 @@ void ParseCommand(String command)
 
         if (command[3] == '+')
         {
-          RunStepper(motor, steps, 100);
+          RunStepper(motor, steps, DEFAULT_SPEED);
         }
         else if (command[3] == '-')
         {
-          RunStepper(motor, -steps, 100);
+          RunStepper(motor, -steps, DEFAULT_SPEED);
         }
       }
     }
@@ -406,22 +406,22 @@ void StopSteppers(int motor)
 
 void SetupSteppers()
 {
-  Base.setMaxSpeed(100.0);
+  Base.setMaxSpeed(200.0);
   Base.setSpeed(100.0);
 
-  Shoulder.setMaxSpeed(100.0);
+  Shoulder.setMaxSpeed(200.0);
   Shoulder.setSpeed(100.0);
 
-  Elbow.setMaxSpeed(100.0);
+  Elbow.setMaxSpeed(200.0);
   Elbow.setSpeed(100.0);
 
-  Pitch.setMaxSpeed(100.0);
+  Pitch.setMaxSpeed(200.0);
   Pitch.setSpeed(100.0);
 
-  Roll.setMaxSpeed(100.0);
+  Roll.setMaxSpeed(200.0);
   Roll.setSpeed(100.0);
 
-  Gripper.setMaxSpeed(100.0);
+  Gripper.setMaxSpeed(200.0);
   Gripper.setSpeed(100.0);
 }
 
