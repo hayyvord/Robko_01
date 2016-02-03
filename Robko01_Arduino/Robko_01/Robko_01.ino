@@ -259,7 +259,7 @@ void ParseCommand(String command)
     }
   }
 
-  else if (command == "?VOLTAGE\n")
+  else if (command == "?ANALOG\n")
   {
     value = analogRead(ANALOG_INPUT);
     vout = (value * 5.0) / 1024.0;
@@ -267,7 +267,7 @@ void ParseCommand(String command)
     if (vin < 0.09) {
       vin = 0.0;
     }
-    Serial.print("#VOLTAGE: ");
+    Serial.print("#ANALOG: ");
     Serial.print(vin);
     Serial.println(" ");
   }
