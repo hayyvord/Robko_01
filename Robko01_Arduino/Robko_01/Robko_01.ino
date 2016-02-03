@@ -11,9 +11,9 @@ AccelStepper Gripper(AccelStepper::HALF4WIRE, 31, 33, 35, 37);
 
 String IncommingCommnad = "";
 
-#define defaultSpeed 100
+#define Default_Speed 100
 
-#define analogInput A0
+#define Analog_Input A0
 
 #define X1 2
 #define X2 3
@@ -71,9 +71,9 @@ boolean ValidateCommand(String command)
 {
   boolean state = false;
 
-  int Motor = 0;
-  int Steps = 0;
-  int Speed = 0;
+  static int motor = 0;
+  static int steps = 0;
+  static int speed = 0;
 
   if (command[0] == '?' && command[8] == '\n')
   {
@@ -81,16 +81,16 @@ boolean ValidateCommand(String command)
     {
       if (command[1] == 'M')
       {
-        Motor = atoi(command.substring(2).c_str());
-        Steps = atoi(command.substring(4, 8).c_str());
+        motor = atoi(command.substring(2).c_str());
+        steps = atoi(command.substring(4, 8).c_str());
 
-        if (Steps <= 1999 && Steps >= -1999)
+        if (steps <= 1999 && steps >= -1999)
         {
           state = true;
 
         }
 
-        if (Motor >= 0 && Motor <= 5)
+        if (motor >= 0 && motor <= 5)
         {
           state = true;
 
@@ -106,21 +106,21 @@ boolean ValidateCommand(String command)
     {
       if (command[1] == 'D')
       {
-        Motor = atoi(command.substring(2).c_str());
-        Steps = atoi(command.substring(4, 8).c_str());
-        Speed = atoi(command.substring(9, 13).c_str());
+        motor = atoi(command.substring(2).c_str());
+        steps = atoi(command.substring(4, 8).c_str());
+        speed = atoi(command.substring(9, 13).c_str());
 
-        if (Steps <= 1999 && Steps >= -1999)
+        if (steps <= 1999 && steps >= -1999)
         {
           state = true;
         }
 
-        if (Motor >= 0 && Motor <= 5)
+        if (motor >= 0 && motor <= 5)
         {
           state = true;
         }
 
-        if (Speed >= 0 && Speed <= 100)
+        if (speed >= 0 && speed <= 100)
         {
           state = true;
         }
@@ -133,15 +133,16 @@ boolean ValidateCommand(String command)
   {
     if (command[1] == 'E')
     {
-      Speed = atoi(command.substring(3, 7).c_str());
+      speed = atoi(command.substring(3, 7).c_str());
 
-      if (Speed >= 0 && Speed <= 100)
+      if (speed >= 0 && speed <= 100)
       {
         state = true;
       }
-      Motor = atoi(command.substring(2).c_str());
+      
+      motor = atoi(command.substring(2).c_str());
 
-      if (Motor >= 0 && Motor <= 5)
+      if (motor >= 0 && motor <= 5)
       {
         state = true;
       }
@@ -153,9 +154,9 @@ boolean ValidateCommand(String command)
   {
     if (command[1] == 'S')
     {
-      Motor = atoi(command.substring(2).c_str());
+      motor = atoi(command.substring(2).c_str());
 
-      if (Motor >= 0 && Motor <= 5)
+      if (motor >= 0 && motor <= 5)
       {
         state = true;
       }
@@ -201,11 +202,11 @@ void ParseCommand(String command)
 
         if (command[3] == '+')
         {
-          RunStepper(Motor, Steps, defaultSpeed);
+          RunStepper(Motor, Steps, Default_Speed);
         }
         else if (command[3] == '-')
         {
-          RunStepper(Motor, -Steps, defaultSpeed);
+          RunStepper(Motor, -Steps, Default_Speed);
         }
 
       }
@@ -260,13 +261,13 @@ void ParseCommand(String command)
 
   else if (command == "?VOLTAGE\n")
   {
-    value = analogRead(analogInput);
+    value = analogRead(Analog_Input);
     vout = (value * 5.0) / 1024.0;
     vin = vout / (R2 / (R1 + R2));
     if (vin < 0.09) {
       vin = 0.0;
     }
-    Serial.print("Voltage:");
+    Serial.print("#Voltage:");
     Serial.print(vin);
     Serial.println(" ");
 
@@ -274,8 +275,8 @@ void ParseCommand(String command)
 
   else if (command == "?VERSION\n")
   {
-    Serial.println("NAME: Robko01");
-    Serial.println("DATE: 29.1.2016y.");
+    Serial.println("#NAME: Robko01");
+    Serial.println("#DATE: 29.1.2016y.");
   }
 
   else if (command == "?INPUTS\n")
