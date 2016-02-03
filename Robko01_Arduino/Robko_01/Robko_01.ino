@@ -266,14 +266,9 @@ void ParseCommand(String command)
     if (vin < 0.09) {
       vin = 0.0;
     }
-<<<<<<< HEAD
     Serial.print("#VOLTAGE: ");
-=======
-    Serial.print("#Voltage: ");
->>>>>>> origin/master
     Serial.print(vin);
     Serial.println(" ");
-
   }
 
   else if (command == "?VERSION\n")
