@@ -69,7 +69,8 @@ void ReadCommand()
 
 boolean ValidateCommand(String command)
 {
-  boolean state = false;
+  boolean state;
+  state = false;
 
   static int motor = 0;
   static int steps = 0;
