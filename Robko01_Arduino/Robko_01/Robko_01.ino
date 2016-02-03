@@ -27,14 +27,6 @@ boolean Input3 = false;
 boolean Input4 = false;
 boolean Input5 = false;
 
-float vout = 0.0;
-float vin = 0.0;
-
-float R1 = 100000.0;
-float R2 = 10000.0;
-
-int value = 0;
-
 void setup() {
   SetupSteppers();
   SetInputs();
@@ -267,6 +259,12 @@ void ParseCommand(String command)
 
   else if (command == "?ANALOG\n")
   {
+    float vout = 0.0;
+    float vin = 0.0;
+    float R1 = 100000.0;
+    float R2 = 10000.0;
+    int value = 0;
+
     value = analogRead(ANALOG_INPUT);
     vout = (value * 5.0) / 1024.0;
     vin = vout / (R2 / (R1 + R2));
