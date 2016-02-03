@@ -188,6 +188,7 @@ boolean ValidateCommand(String command)
 
 void ParseCommand(String command)
 {
+
   static int motor;
   motor = -1;
   static int steps;
