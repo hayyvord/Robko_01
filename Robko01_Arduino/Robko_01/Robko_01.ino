@@ -11,8 +11,33 @@ AccelStepper Gripper(AccelStepper::HALF4WIRE, 31, 33, 35, 37);
 
 String IncommingCommnad = "";
 
+#define defaultSpeed 100
+
+#define analogInput A0
+
+#define X1 2
+#define X2 3
+#define X3 4
+#define X4 5
+#define X5 6
+
+boolean Input1 = false;
+boolean Input2 = false;
+boolean Input3 = false;
+boolean Input4 = false;
+boolean Input5 = false;
+
+float vout = 0.0;
+float vin = 0.0;
+
+float R1 = 100000.0;
+float R2 = 10000.0;
+
+int value = 0;
+
 void setup() {
   SetupSteppers();
+  SetInputs();
   Serial.begin(9600);
 }
 
@@ -44,11 +69,35 @@ void ReadCommand()
 
 boolean ValidateCommand(String command)
 {
-  boolean state;
+  boolean state = false;
 
   int Motor = 0;
   int Steps = 0;
   int Speed = 0;
+
+  if (command[0] == '?' && command[8] == '\n')
+  {
+    if (command[3] == '-' || command[3] == '+')
+    {
+      if (command[1] == 'M')
+      {
+        Motor = atoi(command.substring(2).c_str());
+        Steps = atoi(command.substring(4, 8).c_str());
+
+        if (Steps <= 1999 && Steps >= -1999)
+        {
+          state = true;
+
+        }
+
+        if (Motor >= 0 && Motor <= 5)
+        {
+          state = true;
+
+        }
+      }
+    }
+  }
 
   //?M0+1000:0123\n
   if (command[0] == '?' && command[8] == ':' && command[13] == '\n')
@@ -113,6 +162,21 @@ boolean ValidateCommand(String command)
     }
   }
 
+  if (command == "?INPUTS\n")
+  {
+    state = true;
+  }
+
+  if (command == "?VOLTAGE\n")
+  {
+    state = true;
+  }
+
+  if (command == "?VERSION\n")
+  {
+    state = true;
+  }
+
   return state;
 }
 
@@ -129,7 +193,7 @@ void ParseCommand(String command)
   {
     if (command[3] == '-' || command[3] == '+')
     {
-      if (command[1] == 'D')
+      if (command[1] == 'M')
       {
         Motor = atoi(command.substring(2).c_str());
         Steps = atoi(command.substring(4, 8).c_str());
@@ -137,16 +201,40 @@ void ParseCommand(String command)
 
         if (command[3] == '+')
         {
-          RunStepper(Motor, Steps, Speed);
+          RunStepper(Motor, Steps, defaultSpeed);
         }
         else if (command[3] == '-')
         {
-          RunStepper(Motor, -Steps, Speed);
+          RunStepper(Motor, -Steps, defaultSpeed);
         }
 
       }
     }
   }
+
+  if (command[0] == '?' && command[8] == '\n')
+  {
+    if (command[3] == '-' || command[3] == '+')
+    {
+      Motor = atoi(command.substring(2).c_str());
+      Steps = atoi(command.substring(4, 8).c_str());
+
+      if (command[1] == 'D')
+      {
+
+        if (command[3] == '+')
+        {
+          RunStepper(Motor, Steps, 100);
+        }
+        else if (command[3] == '-')
+        {
+          RunStepper(Motor, -Steps, 100);
+        }
+      }
+    }
+  }
+
+
   //E0:1000\n
   else if (command[0] == '?' && command[2] == ':' && command[7] == '\n')
   {
@@ -170,6 +258,45 @@ void ParseCommand(String command)
     }
   }
 
+  else if (command == "?VOLTAGE\n")
+  {
+    value = analogRead(analogInput);
+    vout = (value * 5.0) / 1024.0;
+    vin = vout / (R2 / (R1 + R2));
+    if (vin < 0.09) {
+      vin = 0.0;
+    }
+    Serial.print("Voltage:");
+    Serial.print(vin);
+    Serial.println(" ");
+
+  }
+
+  else if (command == "?VERSION\n")
+  {
+    Serial.println("NAME: Robko01");
+    Serial.println("DATE: 29.1.2016y.");
+  }
+
+  else if (command == "?INPUTS\n")
+  {
+    Input1 = digitalRead(X1);
+    Input2 = digitalRead(X2);
+    Input3 = digitalRead(X3);
+    Input4 = digitalRead(X4);
+    Input5 = digitalRead(X5);
+
+    Serial.print("Input1: ");
+    Serial.println(Input1);
+    Serial.print("Input2: ");
+    Serial.println(Input2);
+    Serial.print("Input3: ");
+    Serial.println(Input3);
+    Serial.print("Input4: ");
+    Serial.println(Input4);
+    Serial.print("Input5: ");
+    Serial.println(Input5);
+  }
 
 }
 
@@ -287,13 +414,13 @@ void SetupSteppers()
 
   Elbow.setMaxSpeed(100.0);
   Elbow.setSpeed(100.0);
-  
+
   Pitch.setMaxSpeed(100.0);
   Pitch.setSpeed(100.0);
-  
+
   Roll.setMaxSpeed(100.0);
   Roll.setSpeed(100.0);
-  
+
   Gripper.setMaxSpeed(100.0);
   Gripper.setSpeed(100.0);
 }
@@ -308,3 +435,11 @@ void RunMotors()
   Gripper.run();
 }
 
+void SetInputs()
+{
+  pinMode(X1, INPUT);
+  pinMode(X2, INPUT);
+  pinMode(X3, INPUT);
+  pinMode(X4, INPUT);
+  pinMode(X5, INPUT);
+}
