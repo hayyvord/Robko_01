@@ -266,7 +266,11 @@ void ParseCommand(String command)
     if (vin < 0.09) {
       vin = 0.0;
     }
+<<<<<<< HEAD
     Serial.print("#VOLTAGE: ");
+=======
+    Serial.print("#Voltage: ");
+>>>>>>> origin/master
     Serial.print(vin);
     Serial.println(" ");
 
@@ -428,11 +432,11 @@ void SetupSteppers()
 void RunMotors()
 {
   Base.runSpeedToPosition();
-  Shoulder.run();
-  Elbow.run();
-  Pitch.run();
-  Roll.run();
-  Gripper.run();
+  Shoulder.runSpeedToPosition();
+  Elbow.runSpeedToPosition();
+  Pitch.runSpeedToPosition();
+  Roll.runSpeedToPosition();
+  Gripper.runSpeedToPosition();
 }
 
 void SetInputs()
