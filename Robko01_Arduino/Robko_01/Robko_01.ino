@@ -79,7 +79,7 @@ boolean ValidateCommand(String command)
   {
     if (command[3] == '-' || command[3] == '+')
     {
-      if (command[1] == 'M')
+      if (command[1] == 'D')
       {
         motor = atoi(command.substring(2).c_str());
         steps = atoi(command.substring(4, 8).c_str());
@@ -104,7 +104,7 @@ boolean ValidateCommand(String command)
   {
     if (command[3] == '-' || command[3] == '+')
     {
-      if (command[1] == 'D')
+      if (command[1] == 'M')
       {
         motor = atoi(command.substring(2).c_str());
         steps = atoi(command.substring(4, 8).c_str());
@@ -212,7 +212,7 @@ void ParseCommand(String command)
     }
   }
 
-  if (command[0] == '?' && command[8] == '\n')
+  else if (command[0] == '?' && command[8] == '\n')
   {
     if (command[3] == '-' || command[3] == '+')
     {
@@ -285,15 +285,15 @@ void ParseCommand(String command)
     Input4 = digitalRead(X4);
     Input5 = digitalRead(X5);
 
-    Serial.print("Input1: ");
+    Serial.print("#INPUT1: ");
     Serial.println(Input1);
-    Serial.print("Input2: ");
+    Serial.print("#INPUT2: ");
     Serial.println(Input2);
-    Serial.print("Input3: ");
+    Serial.print("#INPUT3: ");
     Serial.println(Input3);
-    Serial.print("Input4: ");
+    Serial.print("#INPUT4: ");
     Serial.println(Input4);
-    Serial.print("Input5: ");
+    Serial.print("#INPUT5: ");
     Serial.println(Input5);
   }
 
