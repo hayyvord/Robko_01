@@ -72,9 +72,12 @@ boolean ValidateCommand(String command)
   boolean state;
   state = false;
 
-  static int motor = -1;
-  static int steps = -1;
-  static int speed = -1;
+  static int motor;
+  motor = -1;
+  static int steps;
+  steps = -1;
+  static float speed;
+  speed = -1;
 
   if (command[0] == '?' && command[8] == '\n')
   {
@@ -169,7 +172,7 @@ boolean ValidateCommand(String command)
     state = true;
   }
 
-  if (command == "?VOLTAGE\n")
+  if (command == "?ANALOG\n")
   {
     state = true;
   }
@@ -185,10 +188,12 @@ boolean ValidateCommand(String command)
 
 void ParseCommand(String command)
 {
-  static int motor = -1;
-  static int steps = -1;
-  static float speed = -1;
-
+  static int motor;
+  motor = -1;
+  static int steps;
+  steps = -1;
+  static float speed;
+  speed = -1;
 
   if (command[0] == '?' && command[8] == ':' && command[13] == '\n')
   {
