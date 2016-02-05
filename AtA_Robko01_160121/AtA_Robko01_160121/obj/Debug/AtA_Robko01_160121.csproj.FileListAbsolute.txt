@@ -1,0 +1,15 @@
+C:\Documents and Settings\Aleksandar Atanasov\My Documents\Visual Studio 2008\Projects\AtA_Robko01_160121\AtA_Robko01_160121\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Aleksandar Atanasov\My Documents\Visual Studio 2008\Projects\AtA_Robko01_160121\AtA_Robko01_160121\obj\Debug\AtA_Robko01_160121.Properties.Resources.resources
+C:\Documents and Settings\Aleksandar Atanasov\My Documents\Visual Studio 2008\Projects\AtA_Robko01_160121\AtA_Robko01_160121\obj\Debug\AtA_Robko01_160121.csproj.GenerateResource.Cache
+C:\Documents and Settings\Aleksandar Atanasov\My Documents\Visual Studio 2008\Projects\AtA_Robko01_160121\AtA_Robko01_160121\bin\Debug\AtA_Robko01_160121.exe
+C:\Documents and Settings\Aleksandar Atanasov\My Documents\Visual Studio 2008\Projects\AtA_Robko01_160121\AtA_Robko01_160121\bin\Debug\AtA_Robko01_160121.pdb
+C:\Documents and Settings\Aleksandar Atanasov\My Documents\Visual Studio 2008\Projects\AtA_Robko01_160121\AtA_Robko01_160121\obj\Debug\AtA_Robko01_160121.exe
+C:\Documents and Settings\Aleksandar Atanasov\My Documents\Visual Studio 2008\Projects\AtA_Robko01_160121\AtA_Robko01_160121\obj\Debug\AtA_Robko01_160121.pdb
+C:\Documents and Settings\Aleksandar Atanasov\My Documents\Visual Studio 2008\Projects\AtA_Robko01_160121\AtA_Robko01_160121\obj\Debug\AtA_Robko01_160121.RobotForm.resources
+C:\Users\Александър\Desktop\AtA_Robko01_160121\AtA_Robko01_160121\obj\Debug\AtA_Robko01_160121.exe
+C:\Users\Александър\Desktop\AtA_Robko01_160121\AtA_Robko01_160121\obj\Debug\AtA_Robko01_160121.pdb
+C:\Users\Александър\Desktop\AtA_Robko01_160121\AtA_Robko01_160121\bin\Debug\AtA_Robko01_160121.exe
+C:\Users\Александър\Desktop\AtA_Robko01_160121\AtA_Robko01_160121\bin\Debug\AtA_Robko01_160121.pdb
+C:\Users\Александър\Desktop\AtA_Robko01_160121\AtA_Robko01_160121\obj\Debug\AtA_Robko01_160121.RobotForm.resources
+C:\Users\Александър\Desktop\AtA_Robko01_160121\AtA_Robko01_160121\obj\Debug\AtA_Robko01_160121.Properties.Resources.resources
+C:\Users\Александър\Desktop\AtA_Robko01_160121\AtA_Robko01_160121\obj\Debug\AtA_Robko01_160121.csproj.GenerateResource.Cache

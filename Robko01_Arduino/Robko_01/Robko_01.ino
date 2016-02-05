@@ -2,12 +2,15 @@
 #include <String.h>
 #include <stdlib.h>
 
+#define NUM_AXIES
+
 AccelStepper Base(AccelStepper::HALF4WIRE, 23, 25, 27, 29);
 AccelStepper Shoulder(AccelStepper::HALF4WIRE, 22, 24, 26, 28);
 AccelStepper Elbow(AccelStepper::HALF4WIRE, 30, 32, 34, 36);
 AccelStepper Pitch(AccelStepper::HALF4WIRE, 39, 41, 43, 45);
 AccelStepper Roll(AccelStepper::HALF4WIRE, 38, 40, 42, 44);
 AccelStepper Gripper(AccelStepper::HALF4WIRE, 31, 33, 35, 37);
+
 
 String IncommingCommnad = "";
 
@@ -70,6 +73,8 @@ boolean ValidateCommand(String command)
   steps = -1;
   static float speed;
   speed = -1;
+
+
 
   if (command[0] == '?' && command[8] == '\n')
   {
@@ -306,6 +311,10 @@ void ParseCommand(String command)
 
 void RunStepper(int motor, int steps, int Speed)
 {
+  char printl[256];
+  sprintf(printl, "#%c%d:%04d:%04d",'M',motor, steps, Speed);
+  Serial.println(printl);
+
   switch (motor) {
     case 0:
       Base.move(steps);
